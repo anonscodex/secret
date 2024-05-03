@@ -1,5 +1,9 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useFetch from "./useFetch";
+
+
+
+
 
 const BlogDetails = () => {
 const {id} = useParams();
@@ -15,7 +19,16 @@ const {data: blogs, isPending, error} = useFetch('http://localhost:8000/blogs/' 
             <h2 className="text-2xl font-bold text-white mb-2">{blogs.title}</h2>
             <p className="text-base text-neutral-500 leading-relaxed">{blogs.content}</p>
         </article>)}
+
+                <div className="flex items-center justify-center">
+        <button type="submit" className="bg-my-logo-color mt-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        <Link to = "/">Go back</Link>
+        </button>
+
         </div>
+        </div>
+
+
      );
 }
  

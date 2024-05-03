@@ -1,26 +1,42 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 
+function getDate() {
+  const today = new Date();
+  const month = today.getMonth() + 1;
+  const year = today.getFullYear();
+  const date = today.getDate();
+  return `${month}/${date}/${year}`;
+}
+
 const Create = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [isPending, setIsPending] = useState(false)
     const navigate = useNavigate()
+    const [setDate, setGetDate] = useState(getDate())
   
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        const secret = {title, content}
-        setIsPending(true)
-        fetch('http://localhost:8000/blogs', {
+        const secret = {title, content, setDate}
+        
+        if(title !== "" && content !== ""){
+          setIsPending(true)
+          fetch('http://localhost:8000/blogs', {
 
         method: 'POST',
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(secret)
         }).then(() => {
+          
             setIsPending(false)
             navigate('/')
         })
+        } else {
+          alert('Input something')
+        }
+        
 
     }
   
