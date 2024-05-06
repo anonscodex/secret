@@ -1,25 +1,36 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 
-function getDate() {
-  const today = new Date();
-  const month = today.getMonth() + 1;
-  const year = today.getFullYear();
-  const date = today.getDate();
-  return `${month}/${date}/${year}`;
-}
+
+
+  const date = new Date();
+    const showTime = date.getDate() + 
+    "/" +
+    (date.getMonth() + 1) +
+    "/" +
+    date.getFullYear() +
+    "  at " +
+    date.getHours() +
+    ":" +
+    date.getMinutes();
+
+
+    
+        
+        
+
 
 const Create = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [isPending, setIsPending] = useState(false)
     const navigate = useNavigate()
-    const [setDate, setGetDate] = useState(getDate())
+    //const [currentDate, setCurrentDate] = useState(getDate());
   
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        const secret = {title, content, setDate}
+        const secret = {title, content, showTime}
         
         if(title !== "" && content !== ""){
           setIsPending(true)

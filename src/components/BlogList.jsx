@@ -12,10 +12,16 @@ const BlogList = ({ blogs }) => {
     }
   };
 
+  const handleRead = (id) => {
+    if (expandedIds.includes(id)) {
+      console.log("reading")
+    } 
+  }
+
   return (
-    <div className="container sm:m-10">
+    <div className="container sm:m-10" >
       {blogs.map((blog) => (
-        <div className="p-10 rounded-lg shadow-md" key={blog.id}>
+        <div className="p-10 rounded-lg shadow-md" key={blog.id}   onClick={() => handleRead(blogs.id)}>
           <Link to={`/secret/${blog.id}`}>
             <h2 className="text-2xl font-bold text-white mb-2">{blog.title}</h2>
             <p className="text-base text-neutral-500 leading-relaxed">
@@ -28,8 +34,7 @@ const BlogList = ({ blogs }) => {
                 {expandedIds.includes(blog.id) ? "Read Less" : "Read More"}
               </button>
             )}
-            <h6 className="text-neutral-700 float-right">posted on {blog.setDate}</h6>
-            
+            <h6 className="text-neutral-700 float-right">posted on {blog.showTime} </h6>
           </Link>
         </div>
       ))}
