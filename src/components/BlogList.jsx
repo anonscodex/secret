@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const BlogList = ({ blogs }) => {
   const [expandedIds, setExpandedIds] = useState([]);
+  const [read, setRead] = useState('.')
 
   const toggleExpand = (id) => {
+    
     if (expandedIds.includes(id)) {
       setExpandedIds(expandedIds.filter((itemId) => itemId !== id));
     } else {
@@ -12,18 +14,15 @@ const BlogList = ({ blogs }) => {
     }
   };
 
-  const handleRead = (id) => {
-    if (expandedIds.includes(id)) {
-      console.log("reading")
-    } 
-  }
 
   return (
-    <div className="container sm:m-10" >
+    <div className="container sm:m-10 ">
       {blogs.map((blog) => (
-        <div className="p-10 rounded-lg shadow-md" key={blog.id}   onClick={() => handleRead(blogs.id)}>
-          <Link to={`/secret/${blog.id}`}>
-            <h2 className="text-2xl font-bold text-white mb-2">{blog.title}</h2>
+        <div className="p-10 rounded-lg shadow-md " key={blog.id}  >
+
+          <Link to={`/secret/${blog.id}`} >
+          <h6 className="text-my-logo-color float-right  ">{read}</h6>
+            <h2 className="text-2xl font-bold text-white mb-2  ">{blog.title}</h2>
             <p className="text-base text-neutral-500 leading-relaxed">
               {expandedIds.includes(blog.id)
                 ? blog.content
@@ -35,10 +34,14 @@ const BlogList = ({ blogs }) => {
               </button>
             )}
             <h6 className="text-neutral-700 float-right">posted on {blog.showTime} </h6>
+
+    
           </Link>
         </div>
       ))}
     </div>
+
+    
   );
 };
 
